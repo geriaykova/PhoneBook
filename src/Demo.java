@@ -11,6 +11,9 @@ public class Demo {
         phoneBook3.showPhoneBook();
         phoneBook3.createCallsBook(phoneBook3, phoneBook3.getCallsBookMap());
         phoneBook3.showCallsBook();
+//        phoneBook3.deletePair(file, "Anni");
+//        phoneBook3.showPhoneBook();
+//        phoneBook3.showCallsBook();
         phoneBook3.callSomeone("sisi", 5);
         phoneBook3.callSomeone("gergana aykova", 6);
         phoneBook3.callSomeone("Georgi", 7);
@@ -19,6 +22,8 @@ public class Demo {
         phoneBook3.callSomeone("Anni", 4);
         phoneBook3.showCallsBook();
         phoneBook3.showTopFiveCallers();
+
+
 
 
 

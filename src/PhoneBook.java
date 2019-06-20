@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -83,6 +85,27 @@ public class PhoneBook {
         this.showCallsBook();
     }
 
+    // не ми е много ясно как се случва триенето от файл... затова и не върши полезна работа
+    public void deletePair(File file, String name) throws Exception {
+        File tempFile = new File("C:\\Users\\Freeware Sys\\Desktop\\temp.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+
+        String currentLine;
+        while((currentLine = br.readLine()) != null){
+            String trimmedLine = currentLine.trim();
+            if(trimmedLine.toLowerCase().contains(name.toLowerCase())) {
+                continue;
+            }
+            bw.write(currentLine + System.getProperty("line.separator"));
+        }
+        bw.close();
+        br.close();
+        //tempFile.renameTo(file);
+        this.getCallsBookMap().remove(getEntryByName(name));
+        this.getPhoneBookMap().remove(name);
+    }
+
     public void callSomeone(String name, int times) {
         System.err.println(name + " is calling someone...");
         for (Map.Entry<Map.Entry<String, String>, Integer> entry : this.getCallsBookMap().entrySet()) {
@@ -106,6 +129,7 @@ public class PhoneBook {
     }
 
     public void showPhoneBook(){
+        System.out.println();
         System.err.println("Phone Book:");
         for(Map.Entry<String, String> entry : this.getPhoneBookMap().entrySet()){
             System.out.println(entry.getKey() + " " + entry.getValue());
@@ -113,9 +137,10 @@ public class PhoneBook {
     }
 
     public void showCallsBook(){
+        System.out.println();
         System.err.println("Calls Book:");
         for(Map.Entry<Map.Entry<String, String>, Integer> entry : this.getCallsBookMap().entrySet()){
-            System.out.println(entry.getKey() + " calls: " + entry.getValue());
+            System.out.println(entry.getKey() + "  calls: " + entry.getValue());
         }
     }
 
